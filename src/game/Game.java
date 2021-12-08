@@ -1,5 +1,7 @@
 package game;
 
+import game.sehnes.*;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +14,15 @@ public class Game {
     String outputEnd = " " + getCommandsAsString();
 
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
-           new EnemyGameObject("",0,null,0),
+            new PhilippGameObject(),
+            new JuliGameObject(),
+            new ViviGameObject(),
+            new SiggiGameObject(),
+            new VeronikaGameObject(),
+            new AndyGameObject(),
+            new MamaGameObject(),
+            new PapaGameObject(),
+            new EnemyGameObject("",0,null,0),
             new RightInputGameObject("", 0, null, "key"),
             new TalkGameObject("", 0, null)
     };
@@ -49,11 +59,20 @@ public class Game {
         current = world.getCurrent();
         Commands command = toCommand(playerInput);
         if(state == GameState.ItemMenue){
-            try{
-                player.useitem(Integer.valueOf(playerInput));
-            }
-            catch(NumberFormatException e){
-                System.out.println(e.getMessage() + " use Numbers only");
+            if(player.getItemsAsString().equals("")){
+                output += " you dont have any items";
+                state = GameState.newObject;
+            }else {
+                try {
+                    Item currentItem = player.useitem(Integer.valueOf(playerInput));
+                    if (currentItem instanceof ItemKey) {
+                        putPlayerItem(currentItem);
+                        output = "";
+                        state = GameState.newObject;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(e.getMessage() + " use Numbers only");
+                }
             }
         }
         else if(current instanceof GetItemByKeySentence){
@@ -90,12 +109,13 @@ public class Game {
             manageCommand(command);
             return;
         }
-        Item tempItem = ((GetItemByKeySentence) world.getCurrent()).getItemByKeySentence(playerInput);
+        GetItemByKeySentence currentKeyObject = ((GetItemByKeySentence) world.getCurrent());
+        Item tempItem = currentKeyObject.getItemByKeySentence(playerInput);
         if(tempItem == null){
-            output += " no item for you sir";
+            output += currentKeyObject.wrongInputMessage();
         }
         else {
-            output += " congratulations, you received: " + tempItem;
+            output += currentKeyObject.rightInputMessage() + "\ncongratulations, you received: " + tempItem;
             player.addItem(tempItem);
         }
     }
@@ -139,7 +159,7 @@ public class Game {
                  //state = GameState.ObjectWasAttacked;
             }
             case it -> {
-                output += player.getItemsAsString();
+                output += "items: " + player.getItemsAsString();
                 state = GameState.ItemMenue;
             }
         }

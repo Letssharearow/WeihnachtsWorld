@@ -8,9 +8,9 @@ public abstract class AbstractGameobject {
     public static final String TEXT_PATH = "text/";
     final String CLASS_NAME = this.getClass().getName().substring((this.getClass().getPackage().getName().length() + 1));
 
-    String name;
-    int health;
-    Item item;
+    protected String name;
+    protected int health;
+    protected Item item;
 
     public AbstractGameobject(String name, int health, Item item) {
         this.name = name;
@@ -122,11 +122,34 @@ public abstract class AbstractGameobject {
             writeLine(scanner,eingabe);
         }*/
         
-        Map<Integer, String> allTextFiles = new HashMap<>();
+        Map<Integer, String> allTextFiles = new HashMap<>(){
+            @Override
+            public String toString(){
+                Iterator<Entry<Integer,String>> i = entrySet().iterator();
+                if (! i.hasNext())
+                    return "{}";
+
+                StringBuilder sb = new StringBuilder();
+                sb.append('{');
+                int index = 1;
+                for (;;) {
+                    Entry<Integer,String> e = i.next();
+                    Integer key = e.getKey();
+                    String value = e.getValue();
+                    sb.append(key);
+                    sb.append('=');
+                    sb.append(value);
+                    if (! i.hasNext())
+                        return sb.append('}').toString();
+                    sb.append(',').append(index%4 == 0? "\n" : " ");
+                    index++;
+                }
+            }
+        };
         MethodNames[] names = MethodNames.values();
         for (int i = 0; i < Game.allObjects.length; i++) {
             for (int j = 0; j < names.length; j++) {
-                allTextFiles.put(1 * i + j,Game.allObjects[i].CLASS_NAME + names[j]);
+                allTextFiles.put(names.length * i + j,Game.allObjects[i].CLASS_NAME + names[j]);
             }
         }
         int nextFile = 0;

@@ -28,4 +28,14 @@ public class RightInputGameObject extends AbstractGameobject implements GetItemB
         }
         return null;
     }
+
+    @Override
+    public String rightInputMessage() {
+        return "here you go";
+    }
+
+    @Override
+    public String wrongInputMessage() {
+        return "sike, that's the wrong input";
+    }
 }

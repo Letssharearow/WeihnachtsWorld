@@ -8,6 +8,7 @@ public class WorldGenerator {
     AbstractGameobject[][] world;
     int x;
     int y;
+    List<AbstractGameobject> importantObjects = Arrays.asList(Game.allObjects);
 
     public WorldGenerator(int size, List<AbstractGameobject> elements){
         this.world = new AbstractGameobject[size][size];
@@ -30,6 +31,11 @@ public class WorldGenerator {
                 world[i][j] = elements.get((int) (Math.random() * elements.size())).randomObject();
             }
         }
+        setImportantObjects();
+    }
+
+    public void setImportantObjects() {
+        world[x][y] = importantObjects.get(0);
     }
 
     public AbstractGameobject getCurrent(){
