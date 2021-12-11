@@ -11,6 +11,7 @@ public abstract class AbstractGameobject {
     protected String name;
     protected int health;
     protected Item item;
+    boolean visited = false;
 
     public AbstractGameobject(String name, int health, Item item) {
         this.name = name;
@@ -19,6 +20,7 @@ public abstract class AbstractGameobject {
     }
 
     public String helloMessage() {
+        visited = true;
         return AbstractGameobject.randomLine(CLASS_NAME + "HelloMessage" + ".txt");
     }
 
@@ -39,6 +41,25 @@ public abstract class AbstractGameobject {
     @Override
     public String toString(){
         return name;
+    }
+
+    public static String getAllLines(String fileName){
+        String randomLine = "";
+        List<String> allLines = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(TEXT_PATH + fileName))){
+
+            String current = "";
+            while((current = br.readLine()) != null){
+                randomLine += current + "\n";
+            }
+        } catch (FileNotFoundException e) {
+            //e.printStackTrace();
+            System.out.println("FileNotFound, make sure it is in the text folder and only provide the name to the method);");
+            return "Ich bin ein Zufälliger String";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return randomLine;
     }
 
     public static String randomLine(String fileName){

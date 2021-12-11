@@ -14,6 +14,7 @@ public class Game {
     String outputEnd = " " + getCommandsAsString();
 
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
+            new StartObject(),
             new PhilippGameObject(),
             new JuliGameObject(),
             new ViviGameObject(),
@@ -24,7 +25,8 @@ public class Game {
             new PapaGameObject(),
             new EnemyGameObject("",0,null,0),
             new RightInputGameObject("", 0, null, "key"),
-            new TalkGameObject("", 0, null)
+            new TalkGameObject("", 0, null),
+            new MatheAufgabeGameObject("Rentieraufgabe","matheaufgabe1RentierZeit.txt", "b")
     };
 
     public Game(int size, int difficulty) {
