@@ -1,8 +1,9 @@
 package game;
 
+import game.crusader.*;
 import game.sehnes.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -14,6 +15,13 @@ public class Game {
     String outputEnd = " " + getCommandsAsString();
 
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
+            new StaticStoryGameObject(),
+            new KönigPhilippGameObject(),
+            new RatteGameObject(),
+            new SultanGameObject(),
+            new RichardGameObject(),
+            new SchweinGameObject(),
+            new AbtGameObject(),
             new StartObject(),
             new PhilippGameObject(),
             new JuliGameObject(),
@@ -23,17 +31,22 @@ public class Game {
             new AndyGameObject(),
             new MamaGameObject(),
             new PapaGameObject(),
-            new EnemyGameObject("",0,null,0),
-            new RightInputGameObject("", 0, null, "key"),
-            new TalkGameObject("", 0, null),
-            new MatheAufgabeGameObject("Rentieraufgabe","matheaufgabe1RentierZeit.txt", "b")
+            //new EnemyGameObject("",0,null,0),
+            //new RightInputGameObject("", 0, null, "key"),
+            //new TalkGameObject("", 0, null),
+            //new MatheAufgabeGameObject("Rentieraufgabe","matheaufgabe1RentierZeit.txt", "b")
     };
 
     public Game(int size, int difficulty) {
-        List<AbstractGameobject> enemies = Arrays.asList(allObjects);
-        for (int i = 0; i < difficulty; i++) {
-           // enemies.add(new EnemyGameObject("test", 0, null, 0));
-        }
+        List<AbstractGameobject> enemies = new ArrayList<>();
+        enemies.add(new StaticStoryGameObject());
+        enemies.add(new KönigPhilippGameObject());
+        enemies.add(new RatteGameObject());
+        enemies.add(new SultanGameObject());
+        enemies.add(new RichardGameObject());
+        enemies.add(new SchweinGameObject());
+        enemies.add(new AbtGameObject());
+
         world = new WorldGenerator(size, enemies);
         current = world.getCurrent();
         state = GameState.newObject;
@@ -83,7 +96,9 @@ public class Game {
         else if(command == null && state != GameState.ObjectWasAttacked) return;
         else {
             switch (state) {
-                case newObject -> manageCommand(command);
+                case newObject -> {
+                    manageCommand(command);
+                }
                 case ObjectWasAttacked -> {
                     if(current.health <= 0){
                         output += "nothing happened";
@@ -107,6 +122,37 @@ public class Game {
     }
 
     private void handleStateGetItemByKeySentence(Commands command, String playerInput) {
+
+        if(current instanceof JamborGameObject){
+            boolean doReturn = true;
+            if(command != null) {
+
+                switch (command) {
+                    case in : doReturn = false; break;
+                    case map:
+                        output = "ned spicken!";
+                        break;
+                    case at:
+                    case it:
+                        doReturn = false;
+                        break;
+                    case r:
+                    case u:
+                    case d:
+                    case l: {
+                        if (player.hasItem(JamborGameObject.ITEM_NAME)) {
+                            doReturn = false;
+                        } else {
+                            output = "und tschüss ... oder auch nicht.";
+                        }
+                    }
+                    break;
+                }
+                if (doReturn) {
+                    return;
+                }
+            }
+        }
         if(command != null){
             manageCommand(command);
             return;
@@ -121,7 +167,6 @@ public class Game {
             player.addItem(tempItem);
         }
     }
-
     private void manageCommand(Commands command) {
 
         switch (command){
@@ -164,6 +209,7 @@ public class Game {
                 output += "items: " + player.getItemsAsString();
                 state = GameState.ItemMenue;
             }
+            case map -> output += world;
         }
     }
 

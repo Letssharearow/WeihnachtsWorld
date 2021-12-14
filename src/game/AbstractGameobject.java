@@ -6,12 +6,12 @@ import java.util.*;
 public abstract class AbstractGameobject {
 
     public static final String TEXT_PATH = "text/";
-    final String CLASS_NAME = this.getClass().getName().substring((this.getClass().getPackage().getName().length() + 1));
+    protected final String CLASS_NAME = this.getClass().getName().substring((this.getClass().getPackage().getName().length() + 1));
 
     protected String name;
     protected int health;
     protected Item item;
-    boolean visited = false;
+    protected boolean visited = false;
 
     public AbstractGameobject(String name, int health, Item item) {
         this.name = name;
@@ -93,6 +93,9 @@ public abstract class AbstractGameobject {
             while((currentLine = br.readLine()) != null && i <= index){
                 allLines.add(currentLine);
                 i++;
+            }
+            if(index >= allLines.size()){
+                randomLine = "randomLine";
             }
             randomLine = allLines.get(index);
 

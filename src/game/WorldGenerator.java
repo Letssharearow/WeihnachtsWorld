@@ -1,5 +1,7 @@
 package game;
 
+import game.sehnes.JamborGameObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -54,7 +56,7 @@ public class WorldGenerator {
         ArrayList<Integer> yTemps = new ArrayList<>();
         for (int j = 0; j < RANGE_OF_IMPORTANT_OBJECTS; j++) {
             for (int i = 0; i < RANGE_OF_IMPORTANT_OBJECTS; i++) {
-                if (i == RANGE_OF_IMPORTANT_OBJECTS / 2) {
+                if (i == RANGE_OF_IMPORTANT_OBJECTS / 2 && j == RANGE_OF_IMPORTANT_OBJECTS / 2) {
                     continue;
                 }
                 yTemps.add(i);
@@ -66,6 +68,12 @@ public class WorldGenerator {
             world[x - RANGE_OF_IMPORTANT_OBJECTS/2 + xTemps.remove((int) (Math.random() * xTemps.size()))]
                     [y - RANGE_OF_IMPORTANT_OBJECTS/2 + yTemps.remove((int) (Math.random() * xTemps.size()))] = current;
         }
+
+        world[x+RANGE_OF_IMPORTANT_OBJECTS-1][y+RANGE_OF_IMPORTANT_OBJECTS] = new JamborGameObject();
+        world[x+RANGE_OF_IMPORTANT_OBJECTS][y+RANGE_OF_IMPORTANT_OBJECTS-1] = new JamborGameObject();
+        world[x+RANGE_OF_IMPORTANT_OBJECTS][y+RANGE_OF_IMPORTANT_OBJECTS+1] = new JamborGameObject();
+        world[x+RANGE_OF_IMPORTANT_OBJECTS+1][y+RANGE_OF_IMPORTANT_OBJECTS] = new JamborGameObject();
+        world[x+RANGE_OF_IMPORTANT_OBJECTS][y+RANGE_OF_IMPORTANT_OBJECTS] = new EndGameObject();
 
     }
 
@@ -102,27 +110,49 @@ public class WorldGenerator {
         String st = "";
         for (int i = 0; i < RANGE_OF_MAP; i++) {
             for (int j = 0; j < RANGE_OF_MAP; j++) {
-                int xTemp = x - RANGE_OF_MAP / 2 + i;
-                int yTemp = y - RANGE_OF_MAP / 2 + j;
+                int xTemp = x - RANGE_OF_MAP / 2 + j;
+                int yTemp = y - RANGE_OF_MAP / 2 + i;
                 AbstractGameobject current = world[xTemp][yTemp];
-                if(current == null){
+                if(xTemp == x && yTemp == y){
+                    st += "[ich]";
+                }
+                else if(current instanceof EndGameObject){
+                    st += "?????";
+                }
+                else if(xTemp == world.length / 2 && yTemp == world.length / 2){
+                    st += "  X  ";
+                }
+                else if(current == null){
                     System.out.println(x + " " + RANGE_OF_MAP + " "+ i);
                 }
                 else if(current.visited){
-                    st += current;
+                    String name = current.toString();
+                    if(name.length() < 5){
+                        st += name + mulString(" ", 5 - name.length());
+                    }
+                    else{
+                        st += name.substring(0,5);
+                    }
                 }
                 else if(importantObjects.contains(current)){
-                        st += "?";
+                        st += "  ?  ";
                 }
                 else {
-                    st += "X";
+                    st += "  .  ";
                 }
-                st += //xTemp + " " + yTemp +
-                        "\t";
+                st += " ";
             }
             st += "\n";
         }
         return st;
+    }
+
+    public static String mulString(String string, int amount){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < amount; i++) {
+            result.append(string);
+        }
+        return result.toString();
     }
 
     public static void main(String[] args) {

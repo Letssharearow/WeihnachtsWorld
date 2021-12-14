@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Player {
     private String name;
-    private int health;
+    int health;
     public int damage;
     private List<Item> items;
 
@@ -39,6 +39,11 @@ public class Player {
 
     public void addItem(Item itemToBeAdded){
         items.add(itemToBeAdded);
+    }
+
+    public boolean hasItem(String name){
+        return items.stream()
+                .anyMatch(item -> item.name.equalsIgnoreCase(name));
     }
 
     public String getItemsAsString(){
