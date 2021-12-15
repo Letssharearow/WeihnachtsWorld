@@ -12,7 +12,7 @@ public class PapaGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals("Mau mau")){
+        if(key.toLowerCase().equals(SehnesGameObject.keys[7])){
             return item;
         }
         return null;

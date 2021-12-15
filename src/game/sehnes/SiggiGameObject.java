@@ -12,7 +12,7 @@ public class SiggiGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().contains("mazda")){
+        if(key.toLowerCase().contains(SehnesGameObject.keys[3])){
             return item;
         }
         return null;

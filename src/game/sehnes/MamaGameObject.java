@@ -12,7 +12,7 @@ public class MamaGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals("Name der Schule")){
+        if(key.toLowerCase().equals(SehnesGameObject.keys[6])){
             return item;
         }
         return null;

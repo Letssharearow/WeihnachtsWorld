@@ -12,7 +12,7 @@ public class ViviGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals("lebensmittelchemie")){
+        if(key.toLowerCase().equals(key.equals(SehnesGameObject.keys[2]))){
             return item;
         }
         return null;

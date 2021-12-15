@@ -10,7 +10,7 @@ public class PhilippGameObject extends game.TalkRightInputGameObject{
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.equals("10")){
+        if(key.equals(SehnesGameObject.keys[0])){
             return item;
         }
         return null;

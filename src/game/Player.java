@@ -59,7 +59,7 @@ public class Player {
         if(items.size() == 0 || i >= items.size()){
             return null;
         }
-        return items.get(i);
+        return items.remove(i);
     }
     @Override
     public String toString(){

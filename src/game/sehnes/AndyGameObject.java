@@ -12,7 +12,7 @@ public class AndyGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals("feuerwehr")){
+        if(key.toLowerCase().equals(SehnesGameObject.keys[5])){
             return item;
         }
         return null;

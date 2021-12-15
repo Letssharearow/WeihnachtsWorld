@@ -20,11 +20,11 @@ public class CrusaderGameObject extends StaticStoryGameObject implements ICanAtt
     public String MessageOnAttack() {
         count ++;
         try{
-            return AbstractGameobject.lineAtIndex(CLASS_NAME + "Create" + ".txt", count);
+            return AbstractGameobject.lineAtIndex(CLASS_NAME + "MessageOnAttack" + ".txt", count);
         }
         catch (IndexOutOfBoundsException e){
             count = 0;
-            return AbstractGameobject.lineAtIndex(CLASS_NAME + "Create" + ".txt", count);
+            return AbstractGameobject.lineAtIndex(CLASS_NAME + "MessageOnAttack" + ".txt", count);
         }
     }
 

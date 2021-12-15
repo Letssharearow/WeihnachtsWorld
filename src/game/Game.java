@@ -15,13 +15,6 @@ public class Game {
     String outputEnd = " " + getCommandsAsString();
 
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
-            new StaticStoryGameObject(),
-            new KönigPhilippGameObject(),
-            new RatteGameObject(),
-            new SultanGameObject(),
-            new RichardGameObject(),
-            new SchweinGameObject(),
-            new AbtGameObject(),
             new StartObject(),
             new PhilippGameObject(),
             new JuliGameObject(),
@@ -40,6 +33,11 @@ public class Game {
     public Game(int size, int difficulty) {
         List<AbstractGameobject> enemies = new ArrayList<>();
         enemies.add(new StaticStoryGameObject());
+        enemies.add(new StaticStoryGameObject());
+        enemies.add(new StaticStoryGameObject());
+        enemies.add(new StaticStoryGameObject());
+        enemies.add(new StaticStoryGameObject());
+        enemies.add(new StaticStoryGameObject());
         enemies.add(new KönigPhilippGameObject());
         enemies.add(new RatteGameObject());
         enemies.add(new SultanGameObject());
@@ -50,7 +48,7 @@ public class Game {
         world = new WorldGenerator(size, enemies);
         current = world.getCurrent();
         state = GameState.newObject;
-        player = new Player("someone");
+        player = new Player("Friendly Cobold");
         output = current.helloMessage();
     }
 
@@ -71,6 +69,10 @@ public class Game {
     public void manageInput(String playerInput){
         output = "";
         outputEnd = " " + getCommandsAsString();
+        if(current.health <= 0){
+            output += "nothing happened";
+            return;
+        }
         current = world.getCurrent();
         Commands command = toCommand(playerInput);
         if(state == GameState.ItemMenue){
@@ -80,11 +82,12 @@ public class Game {
             }else {
                 try {
                     Item currentItem = player.useitem(Integer.valueOf(playerInput));
+                    currentItem.useItem(player);
                     if (currentItem instanceof ItemKey) {
                         putPlayerItem(currentItem);
                         output = "";
-                        state = GameState.newObject;
                     }
+                    state = GameState.newObject;
                 } catch (NumberFormatException e) {
                     System.out.println(e.getMessage() + " use Numbers only");
                 }
@@ -100,13 +103,9 @@ public class Game {
                     manageCommand(command);
                 }
                 case ObjectWasAttacked -> {
-                    if(current.health <= 0){
-                        output += "nothing happened";
-                    }
-                    else if (current instanceof ICanAttack) {
+                        ((ICanAttack) current).attack(player);
                         output += ((ICanAttack) current).MessageOnAttack();
-                    } else output += "nothing happened";
-                    state = GameState.newObject;
+                        state = GameState.newObject;
                 }
                 case ObjectDied -> {
                     putPlayerItem(current.item);
@@ -178,8 +177,13 @@ public class Game {
                 else{
                     output += world.getCurrent().attackMessage();
                 }
-                outputEnd = "\n prepare for attack";
-                state = GameState.ObjectWasAttacked;
+                if(current instanceof ICanAttack){
+                    outputEnd = "\n prepare for attack";
+                    state = GameState.ObjectWasAttacked;
+                }
+                else{
+                    state = GameState.newObject;
+                }
             }
             case d -> {
                 world.incY();
@@ -224,7 +228,7 @@ public class Game {
     }
 
     public String getCommandsAsString(){
-        String st = output + "\nactions: ";
+        String st = "" + "\nactions: ";
         Commands[] commands = Commands.values();
         for (int i = 0; i < commands.length; i++) {
             st += commands[i] + " ";

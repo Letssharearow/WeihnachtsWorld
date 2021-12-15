@@ -75,7 +75,7 @@ public abstract class AbstractGameobject {
 
         } catch (FileNotFoundException e) {
             //e.printStackTrace();
-            System.out.println("FileNotFound, make sure it is in the text folder and only provide the name to the method);");
+            System.out.println(fileName + " make sure it is in the text folder and only provide the name to the method);");
             return "Ich bin ein Zufälliger String";
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,7 +101,7 @@ public abstract class AbstractGameobject {
 
         } catch (FileNotFoundException e) {
             //e.printStackTrace();
-            System.out.println("FileNotFound, make sure it is in the text folder and only provide the name to the method);");
+            System.out.println(fileName + " not foundsure it is in the text folder and only provide the name to the method);");
             return "Ich bin ein Zufälliger String";
         } catch (IOException e) {
             e.printStackTrace();
@@ -128,7 +128,7 @@ public abstract class AbstractGameobject {
 
         } catch (FileNotFoundException e) {
             //e.printStackTrace();
-            System.out.println("FileNotFound, make sure it is in the text folder and only provide the name to the method);");
+            System.out.println(fullFileName + " not found, make sure it is in the text folder and only provide the name to the method);");
         } catch (IOException e) {
             e.printStackTrace();
         }
