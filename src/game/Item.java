@@ -2,6 +2,7 @@ package game;
 
 public abstract class Item {
     String name;
+    protected int amount = 3;
 
     public Item(String name){
         this.name = name;
