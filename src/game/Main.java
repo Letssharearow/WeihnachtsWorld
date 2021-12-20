@@ -10,6 +10,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String eingabe = "";
         while(true){
+            if(game.isOver)
+                break;
             System.out.println(game);
             eingabe = scanner.nextLine();
             if(eingabe.equals("end") || eingabe.equals("stop")){
