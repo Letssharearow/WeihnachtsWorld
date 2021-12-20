@@ -16,7 +16,6 @@ public class Game {
     public boolean isOver = false;
 
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
-            new EndGameObject(),
             new StartObject(),
             new PhilippGameObject(),
             new JuliGameObject(),
@@ -209,24 +208,16 @@ public class Game {
                 }
             }
             case d -> {
-                world.incY();
-                output += world.getCurrent().helloMessage();
-                state = GameState.newObject;
+                movePlayer(0, 1);
             }
             case u -> {
-                world.decY();
-                output += world.getCurrent().helloMessage();
-                state = GameState.newObject;
+                movePlayer(0, -1);
             }
             case r -> {
-                world.incX();
-                output += world.getCurrent().helloMessage();
-                state = GameState.newObject;
+                movePlayer(1, 0);
                 }
             case l -> {
-                world.decX();
-                output += world.getCurrent().helloMessage();
-                state = GameState.newObject;
+                movePlayer(-1, 0);
             }
             case in ->{
                 output += world.getCurrent().interactMessage();
