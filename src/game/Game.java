@@ -135,7 +135,7 @@ public class Game {
                 }
             }
         }
-        output = world.getCurrent() + "\n" + output + "\n" + player.toString();
+        output = world.toString() + "\n" + world.getCurrent() + "\n" + output + "\n\n" + player.toString();
     }
 
     private void handleStateGetItemByKeySentence(Commands command, String playerInput) {
