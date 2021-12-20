@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private String name;
+    public String name;
     int health;
     public int damage;
     private List<Item> items;

@@ -10,7 +10,7 @@ public class PhilippGameObject extends game.TalkRightInputGameObject{
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.equals(SehnesGameObject.keys[0])){
+        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[0].toLowerCase())){
             return item;
         }
         return null;
@@ -18,7 +18,7 @@ public class PhilippGameObject extends game.TalkRightInputGameObject{
 
     @Override
     public String rightInputMessage() {
-        return "Ich weiß nicht ob ich ihn überhaupt mal gestempelt hab";
+        return "Könnte sein, dass man den noch Stempeln muss";
     }
 
     @Override

@@ -40,7 +40,7 @@ public abstract class AbstractGameobject {
 
     @Override
     public String toString(){
-        return name;
+        return name + ", health: " + health;
     }
 
     public static String getAllLines(String fileName){

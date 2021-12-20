@@ -12,7 +12,7 @@ public class JuliGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals(key.equals(SehnesGameObject.keys[1]))){
+        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[1].toLowerCase())){
             return item;
         }
         return null;

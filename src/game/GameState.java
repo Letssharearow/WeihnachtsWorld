@@ -1,5 +1,5 @@
 package game;
 
 public enum GameState {
-    newObject, ObjectWasAttacked, ObjectDied, ItemMenue
+    newObject, ObjectWasAttacked, ObjectDied, ItemMenue, AddName, setStart
 }

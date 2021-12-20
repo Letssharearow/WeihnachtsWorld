@@ -13,7 +13,7 @@ public class CrusaderGameObject extends StaticStoryGameObject implements ICanAtt
 
     @Override
     public void attack(Player player) {
-        player.changeHealth(damage);
+        player.changeHealth(-damage);
     }
 
     @Override

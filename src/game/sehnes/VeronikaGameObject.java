@@ -12,7 +12,7 @@ public class VeronikaGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals(SehnesGameObject.keys[4])){
+        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[4].toLowerCase())){
             return item;
         }
         return null;

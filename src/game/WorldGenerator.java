@@ -2,7 +2,6 @@ package game;
 
 import game.sehnes.JamborGameObject;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,21 +51,17 @@ public class WorldGenerator {
         if(xTemp < 0 || yTemp < 0){
             System.out.println("map to smol WorldGenerator.SetIMportantObjects");
         }
-        ArrayList<Integer> xTemps = new ArrayList<>();
-        ArrayList<Integer> yTemps = new ArrayList<>();
-        for (int j = 0; j < RANGE_OF_IMPORTANT_OBJECTS; j++) {
-            for (int i = 0; i < RANGE_OF_IMPORTANT_OBJECTS; i++) {
-                if (i == RANGE_OF_IMPORTANT_OBJECTS / 2 && j == RANGE_OF_IMPORTANT_OBJECTS / 2) {
-                    continue;
-                }
-                yTemps.add(i);
-                xTemps.add(i);
-            }
+        int forsize = RANGE_OF_IMPORTANT_OBJECTS * RANGE_OF_IMPORTANT_OBJECTS - importantObjects.size();
+        for (int i = 0; i < forsize; i++) {
+            importantObjects.add(null);
         }
-        for (int i = 0; i < importantObjects.size() - 1; i++) {
-            AbstractGameobject current = importantObjects.get(i);
-            world[x - RANGE_OF_IMPORTANT_OBJECTS/2 + xTemps.remove((int) (Math.random() * xTemps.size()))]
-                    [y - RANGE_OF_IMPORTANT_OBJECTS/2 + yTemps.remove((int) (Math.random() * xTemps.size()))] = current;
+        for (int i = x; i < RANGE_OF_IMPORTANT_OBJECTS; i++) {
+            for (int j = y; j < RANGE_OF_IMPORTANT_OBJECTS; j++) {
+                AbstractGameobject current = importantObjects.get((int)(Math.random() * importantObjects.size()));
+                if(current != null){
+                    world[i][j] = current;
+                }
+            }
         }
 
         world[x+RANGE_OF_IMPORTANT_OBJECTS-1][y+RANGE_OF_IMPORTANT_OBJECTS] = new JamborGameObject();

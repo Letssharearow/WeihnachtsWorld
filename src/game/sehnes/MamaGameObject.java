@@ -12,7 +12,7 @@ public class MamaGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals(SehnesGameObject.keys[6])){
+        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[6].toLowerCase())){
             return item;
         }
         return null;
@@ -20,7 +20,7 @@ public class MamaGameObject extends TalkRightInputGameObject {
 
     @Override
     public String rightInputMessage() {
-        return "Aus eigenem Garten";
+        return "Ist aus eigenem Garten";
     }
 
     @Override

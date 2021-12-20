@@ -12,7 +12,7 @@ public class SiggiGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().contains(SehnesGameObject.keys[3])){
+        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[3].toLowerCase())){
             return item;
         }
         return null;
@@ -20,7 +20,7 @@ public class SiggiGameObject extends TalkRightInputGameObject {
 
     @Override
     public String rightInputMessage() {
-        return "und hättest du auch das Kennzeichen gewusst?";
+        return "und hättest du auch das Kennzeichen gewusst :P";
     }
 
     @Override

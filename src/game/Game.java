@@ -12,9 +12,10 @@ public class Game {
     GameState state;
     Player player;
     String output;
-    String outputEnd = " " + getCommandsAsString();
+    String outputEnd = "";
 
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
+            new EndGameObject(),
             new StartObject(),
             new PhilippGameObject(),
             new JuliGameObject(),
@@ -32,6 +33,7 @@ public class Game {
 
     public Game(int size, int difficulty) {
         List<AbstractGameobject> enemies = new ArrayList<>();
+
         enemies.add(new StaticStoryGameObject());
         enemies.add(new StaticStoryGameObject());
         enemies.add(new StaticStoryGameObject());
@@ -47,9 +49,9 @@ public class Game {
 
         world = new WorldGenerator(size, enemies);
         current = world.getCurrent();
-        state = GameState.newObject;
+        state = GameState.AddName;
         player = new Player("Friendly Cobold");
-        output = current.helloMessage();
+        output = "Please Enter your name";
     }
 
     public Game(int size){
@@ -67,6 +69,17 @@ public class Game {
     }
 
     public void manageInput(String playerInput){
+        if(state == GameState.AddName){
+            player.name = playerInput;
+            output = "Hello Wichtelmeister " + playerInput + "\nEnter anything to start the game";
+            state = GameState.setStart;
+            return;
+        }
+        if(state == GameState.setStart){
+            output = current.helloMessage();
+            state = GameState.newObject;
+            return;
+        }
         output = "";
         outputEnd = " " + getCommandsAsString();
         if(current.health <= 0){
@@ -104,6 +117,10 @@ public class Game {
                 }
                 case ObjectWasAttacked -> {
                         ((ICanAttack) current).attack(player);
+                        if(player.health <= 0){
+                            putPlayerItem(new ItemImpl(player.name+"_Dumm"));
+                            player.health = 5;
+                        }
                         output += ((ICanAttack) current).MessageOnAttack();
                         state = GameState.newObject;
                 }
@@ -117,7 +134,7 @@ public class Game {
                 }
             }
         }
-        output = world.getCurrent().name + "\n" + output + "\n" + player.toString();
+        output = world.getCurrent() + "\n" + output + "\n" + player.toString();
     }
 
     private void handleStateGetItemByKeySentence(Commands command, String playerInput) {
@@ -207,11 +224,18 @@ public class Game {
             }
             case in ->{
                 output += world.getCurrent().interactMessage();
-                 //state = GameState.ObjectWasAttacked;
+                if(current instanceof ICanAttack){
+                    outputEnd = "\n prepare for attack";
+                    state = GameState.ObjectWasAttacked;
+                }
             }
             case it -> {
                 output += "items: " + player.getItemsAsString();
                 state = GameState.ItemMenue;
+                if(current instanceof ICanAttack){
+                    outputEnd = "\n prepare for attack";
+                    state = GameState.ObjectWasAttacked;
+                }
             }
             case map -> output += world;
         }

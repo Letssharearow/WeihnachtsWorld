@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class SehnesGameObject {
 
-    public static final String[] keys = new String[]{"10", "prostaugust", "lebensmittelchemie", "mazda 2", "31", "feuerwehr", "mama", "mau mau"}; //philipp, juli, ..
+    public static final String[] keys = new String[]{"10", "prostaugust", "lebensmittelchemie", "mazda 2", "31", "an ", "hokkaido", "mau mau"}; //philipp, juli, ..
 
 
 

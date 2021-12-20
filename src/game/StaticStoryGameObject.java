@@ -16,11 +16,11 @@ public class StaticStoryGameObject extends AbstractGameobject {
         count[0]++;
         visited = true;
         try {
-            return AbstractGameobject.lineAtIndex(CLASS_NAME + "helloMessage" + ".txt", count[0]);
+            return AbstractGameobject.lineAtIndex(CLASS_NAME + "InteractMessage" + ".txt", count[0]);
         }
         catch (IndexOutOfBoundsException e){
             count[0] = 0;
-            return AbstractGameobject.lineAtIndex(CLASS_NAME + "helloMessage" + ".txt", count[0]);
+            return AbstractGameobject.lineAtIndex(CLASS_NAME + "InteractMessage" + ".txt", count[0]);
         }
     }
 

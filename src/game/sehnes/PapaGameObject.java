@@ -12,7 +12,7 @@ public class PapaGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals(SehnesGameObject.keys[7])){
+        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[7].toLowerCase())){
             return item;
         }
         return null;

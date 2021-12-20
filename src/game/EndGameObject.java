@@ -5,6 +5,9 @@ public class EndGameObject extends AbstractGameobject{
         super("Weihnachtsmann", 10, new ItemImpl("GESCHENKE! FROHE WEIHNACHTEN! GEWONNEN!"));
     }
 
+
+
+
     @Override
     public AbstractGameobject randomObject() {
         return null;

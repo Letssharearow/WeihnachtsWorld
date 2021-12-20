@@ -12,7 +12,7 @@ public class AndyGameObject extends TalkRightInputGameObject {
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(key.toLowerCase().equals(SehnesGameObject.keys[5])){
+        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[5].toLowerCase())){
             return item;
         }
         return null;
