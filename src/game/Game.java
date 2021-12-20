@@ -247,6 +247,29 @@ public class Game {
         }
     }
 
+    public void movePlayer(int xPlus, int yPlus){
+        world.incXY(xPlus, yPlus);
+        if(world.getCurrent() instanceof JamborGameObject){
+            if(!playerHasItmes()){
+                world.incXY(xPlus * -1, yPlus * -1);
+                output = "dir Fehlen wichtige Items";
+            }
+        }
+        output += world.getCurrent().helloMessage();
+        state = GameState.newObject;
+    }
+
+    public boolean playerHasItmes(){
+        boolean hasAllItems = true;
+        for(String value : SehnesGameObject.values){
+            if(!player.hasItem(value)){
+                hasAllItems = false;
+                break;
+            }
+        }
+        return hasAllItems;
+    }
+
     public Commands toCommand(String st){
         Commands[] commands = Commands.values();
         for (int i = 0; i < commands.length; i++) {
