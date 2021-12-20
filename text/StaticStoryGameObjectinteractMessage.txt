@@ -7,3 +7,4 @@ Juli ist ganz schön oft beim Volleyball schon das 5. mal diese Woche ... und es
 Ich sehe immer weniger Fleisch im Kühlschrank
 Mama kommt rein und erzählt ganz viel von ihrer Arbeit als Lehrerin
 Der Juli hat keine Zahnspange mehr
+philipp.getHolz() wird immer häufiger genutzt
