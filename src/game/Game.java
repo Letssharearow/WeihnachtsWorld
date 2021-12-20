@@ -139,19 +139,18 @@ public class Game {
     }
 
     private void handleStateGetItemByKeySentence(Commands command, String playerInput) {
-
         if(current instanceof JamborGameObject){
+
             boolean doReturn = true;
             if(command != null) {
 
                 switch (command) {
-                    case in : doReturn = false; break;
-                    case map:
-                        output = "ned spicken!";
-                        break;
+                    case in :
                     case at:
                     case it:
-                        doReturn = false;
+                        doReturn = false; break;
+                    case map:
+                        output = "ned spicken!";
                         break;
                     case r:
                     case u:
@@ -168,6 +167,12 @@ public class Game {
                 if (doReturn) {
                     return;
                 }
+            }
+        }
+        if(current instanceof EndGameObject){
+            if(((EndGameObject) current).hasOne){
+                rollCredits();
+                return;
             }
         }
         if(command != null){
