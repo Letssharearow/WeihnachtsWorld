@@ -270,4 +270,22 @@ public class Game {
     public String toString(){
         return output + outputEnd;
     }
+
+    private void rollCredits(){
+        for (int i = 0; i < 6; i++) {
+            System.out.println(AbstractGameobject.lineAtIndex( "credits" + ".txt", i));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("ENDE!");
+        isOver = true;
+    }
 }
