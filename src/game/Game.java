@@ -13,6 +13,7 @@ public class Game {
     Player player;
     String output;
     String outputEnd = "";
+    public boolean isOver = false;
 
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
             new EndGameObject(),
