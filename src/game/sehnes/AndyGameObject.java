@@ -2,12 +2,21 @@ package game.sehnes;
 
 import game.Item;
 import game.ItemKey;
+import game.Player;
 import game.TalkRightInputGameObject;
 
-public class AndyGameObject extends TalkRightInputGameObject {
+public class AndyGameObject extends TalkRightInputGameObject implements IsSehne {
 
     public AndyGameObject() {
-        super("Andy", 500, new ItemKey("Feuerwehrhelm"));
+        super("Andy",
+                500,
+                new ItemKey(SehnesGameObject.values[5].toLowerCase()){
+                    @Override
+                    public void useItem(Player player){
+                        player.changeHealth(amount);
+                        amount = 0;
+                    }
+                });
     }
 
     @Override
