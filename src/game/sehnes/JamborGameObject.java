@@ -47,7 +47,7 @@ public class JamborGameObject extends TalkRightInputGameObject {
     @Override
     public Item getItemByKeySentence(String key) {
         Item returnValue = null;
-        Optional<StringAndBoolean> value = cellProperties.stream().filter(property -> property.string.equalsIgnoreCase(key)).findAny();
+        Optional<StringAndBoolean> value = cellProperties.stream().filter(property -> SehnesGameObject.equalsXPercent(80, property.string, key)).findAny();
         if(value.isPresent()){
             if(!value.get().isUsed){
                 countRightAnwsers++;
