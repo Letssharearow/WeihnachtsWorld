@@ -1,5 +1,6 @@
 package game;
 
+import game.sehnes.IsSehne;
 import game.sehnes.JamborGameObject;
 
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.List;
 public class WorldGenerator {
 
     final int RANGE_OF_IMPORTANT_OBJECTS = 5;
-    final int RANGE_OF_MAP = 15;
+    final int RANGE_OF_MAP = 10;
     AbstractGameobject[][] world;
     int x;
     int y;
@@ -51,13 +52,17 @@ public class WorldGenerator {
         if(xTemp < 0 || yTemp < 0){
             System.out.println("map to smol WorldGenerator.SetIMportantObjects");
         }
-        int forsize = RANGE_OF_IMPORTANT_OBJECTS * RANGE_OF_IMPORTANT_OBJECTS - importantObjects.size();
+        int forsize = RANGE_OF_IMPORTANT_OBJECTS * RANGE_OF_IMPORTANT_OBJECTS - importantObjects.size() - 1;
         for (int i = 0; i < forsize; i++) {
             importantObjects.add(null);
         }
-        for (int i = x; i < RANGE_OF_IMPORTANT_OBJECTS; i++) {
-            for (int j = y; j < RANGE_OF_IMPORTANT_OBJECTS; j++) {
-                AbstractGameobject current = importantObjects.get((int)(Math.random() * importantObjects.size()));
+        int halfRange= RANGE_OF_IMPORTANT_OBJECTS / 2;
+        for (int i = x - halfRange; i <=  x + halfRange; i++) {
+            for (int j = y - halfRange; j <= y + halfRange; j++) {
+                if(i == x && j == y){
+                    continue;
+                }
+                AbstractGameobject current = importantObjects.remove((int)(Math.random() * importantObjects.size()));
                 if(current != null){
                     world[i][j] = current;
                 }
@@ -96,6 +101,11 @@ public class WorldGenerator {
         this.y--;
     }
 
+    public void incXY(int xPlus, int yPlus){
+        this.x += xPlus;
+        this.y += yPlus;
+    }
+
     public void setY(int y){
         this.y = y;
     }
@@ -129,7 +139,7 @@ public class WorldGenerator {
                         st += name.substring(0,5);
                     }
                 }
-                else if(importantObjects.contains(current)){
+                else if(current instanceof IsSehne){
                         st += "  ?  ";
                 }
                 else {
