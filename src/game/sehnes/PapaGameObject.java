@@ -2,17 +2,23 @@ package game.sehnes;
 
 import game.Item;
 import game.ItemKey;
+import game.Player;
 import game.TalkRightInputGameObject;
 
-public class PapaGameObject extends TalkRightInputGameObject {
+public class PapaGameObject extends TalkRightInputGameObject implements IsSehne{
 
     public PapaGameObject() {
-        super("Papa", 500, new ItemKey("Man nimmt einem Blinden doch nicht seinen Stock"));
+        super("Papa", 500, new ItemKey(SehnesGameObject.values[7].toLowerCase()){
+            @Override
+            public void useItem(Player player){
+                player.setDamage(3);
+            }
+        });
     }
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[7].toLowerCase())){
+        if(SehnesGameObject.equalsXPercent(90, key.toLowerCase(), SehnesGameObject.keys[7].toLowerCase())){
             return item;
         }
         return null;
@@ -20,7 +26,7 @@ public class PapaGameObject extends TalkRightInputGameObject {
 
     @Override
     public String rightInputMessage() {
-        return "Hast du meinen Blindenstock gesehen";
+        return "Hast du meinen Blindenstock gesehen?";
     }
 
     @Override

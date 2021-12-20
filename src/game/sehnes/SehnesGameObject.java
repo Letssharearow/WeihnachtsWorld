@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public class SehnesGameObject {
 
-    public static final String[] keys = new String[]{"10", "prostaugust", "lebensmittelchemie", "mazda 2", "31", "an ", "hokkaido", "mau mau"}; //philipp, juli, ..
+    public static final String[] keys = new String[]{"10", "prostaugust", "lebensmittelchemie", "mazda 2", "31", "118", "hokkaido", "mau mau"}; //philipp, juli, ..
+    public static final String[] values = new String[]{"Schülerausweis", "ProstAugust", "irdend son chemieDing", "Misterious key", "20 Snacktüten", "Feuerwehrhelm", "Zaubertrank", "Man nimmt einem Blinden doch nicht seinen Stock"}; //philipp, juli, ..
 
 
 
@@ -67,7 +68,7 @@ public class SehnesGameObject {
 
         List<Integer> result = new ArrayList<Integer>() ;
         equalsXPercent(0, result, x, compareTo.length(), probablyWrong, compareTo);
-        System.out.println(result + " max: " + compareTo.length());
+        //System.out.println(result + " max: " + compareTo.length());
         Optional<Integer> resultOptional = result.stream()
                 .reduce((first, second) -> {
                     if(first > second){

@@ -2,12 +2,19 @@ package game.sehnes;
 
 import game.Item;
 import game.ItemKey;
+import game.Player;
 import game.TalkRightInputGameObject;
 
-public class JuliGameObject extends TalkRightInputGameObject {
+public class JuliGameObject extends TalkRightInputGameObject implements IsSehne{
 
     public JuliGameObject() {
-        super("Juli", 500, new ItemKey("ProstAugust"));
+        super("Juli", 500, new ItemKey(SehnesGameObject.values[1].toLowerCase()) {
+            @Override
+            public void useItem(Player player) {
+                player.changeHealth(amount);
+                amount = 0;
+            }
+        });
     }
 
     @Override

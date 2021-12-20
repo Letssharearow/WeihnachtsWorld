@@ -4,10 +4,10 @@ import game.Item;
 import game.ItemKey;
 import game.TalkRightInputGameObject;
 
-public class SiggiGameObject extends TalkRightInputGameObject {
+public class SiggiGameObject extends TalkRightInputGameObject implements IsSehne{
 
     public SiggiGameObject() {
-        super("Siggi", 500, new ItemKey("misterious key"));
+        super("Siggi", 500, new ItemKey(SehnesGameObject.values[3].toLowerCase()));
     }
 
     @Override

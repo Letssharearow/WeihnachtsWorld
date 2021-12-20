@@ -3,14 +3,14 @@ package game.sehnes;
 import game.Item;
 import game.ItemKey;
 
-public class PhilippGameObject extends game.TalkRightInputGameObject{
+public class PhilippGameObject extends game.TalkRightInputGameObject implements IsSehne{
     public PhilippGameObject() {
-        super("Philipp", 500, new ItemKey("Schuelerausweis"));
+        super("Philipp", 500, new ItemKey(SehnesGameObject.values[0].toLowerCase()));
     }
 
     @Override
     public Item getItemByKeySentence(String key) {
-        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[0].toLowerCase())){
+        if(SehnesGameObject.equalsXPercent(100, key.toLowerCase(), SehnesGameObject.keys[0].toLowerCase())){
             return item;
         }
         return null;
