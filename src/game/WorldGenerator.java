@@ -10,7 +10,7 @@ import java.util.List;
 public class WorldGenerator {
 
     final int RANGE_OF_IMPORTANT_OBJECTS = 5;
-    final int RANGE_OF_MAP = 10;
+    final int RANGE_OF_MAP = 13;
     AbstractGameobject[][] world;
     int x;
     int y;
@@ -35,7 +35,8 @@ public class WorldGenerator {
         for (int i = 0; i < world.length; i++) {
             for (int j = 0; j < world[i].length; j++) {
                 int random = (int) (Math.random() * elements.size());
-                world[i][j] = elements.get(random).randomObject();
+                AbstractGameobject currentRandom = elements.get(random).randomObject();
+                world[i][j] = currentRandom;
                 if(world[i][j] == null){
                     System.out.println(elements.get(random).getClass());
                 };
