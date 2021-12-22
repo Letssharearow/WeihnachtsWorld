@@ -2,7 +2,8 @@ package game;
 
 public class TalkGameObject extends AbstractGameobject{
 
-    int line = -1;
+    protected int line = -1;
+    protected String endMessage;
 
     public TalkGameObject(String name, int health, Item item) {
         super(name, health, item);
@@ -15,7 +16,19 @@ public class TalkGameObject extends AbstractGameobject{
 
     @Override
     public String interactMessage(){
+        if(endMessage != null){
+            return endMessage;
+        }
         line ++;
-        return AbstractGameobject.lineAtIndex(CLASS_NAME + "interactMessage" + ".txt", line);
+        String returnValue;
+        try{
+            returnValue = AbstractGameobject.lineAtIndex(CLASS_NAME + "interactMessage" + ".txt", line);
+        }
+        catch (IndexOutOfBoundsException e){
+            line--;
+            endMessage = AbstractGameobject.lineAtIndex(CLASS_NAME + "interactMessage" + ".txt", line);
+            returnValue = endMessage;
+        }
+        return returnValue;
     }
 }
