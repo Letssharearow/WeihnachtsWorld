@@ -10,12 +10,7 @@ public class JamborGameObject extends TalkRightInputGameObject {
     List<StringAndBoolean> cellProperties = Arrays.asList(
             new StringAndBoolean("endoplasmatisches retikulum"),
             new StringAndBoolean("Golgi-Apparat"),
-            new StringAndBoolean("GolgiApparat"),
-            new StringAndBoolean("Golgi Apparat"),
             new StringAndBoolean("mitochondrium"),
-            new StringAndBoolean("mitochondrien"),
-            new StringAndBoolean("ER"),
-            new StringAndBoolean("Chloroplasten"),
             new StringAndBoolean("Chloroplast"),
             new StringAndBoolean("Zellkern"),
             new StringAndBoolean("Zellplasma"),
@@ -23,10 +18,13 @@ public class JamborGameObject extends TalkRightInputGameObject {
             new StringAndBoolean("Ribosom"),
             new StringAndBoolean("Zellmembran"),
             new StringAndBoolean("Vesikel"),
-            new StringAndBoolean("Vakuole"));
+            new StringAndBoolean("Vakuole"),
+            new StringAndBoolean("Membran"),
+            new StringAndBoolean("Cytoplasma"));
 
-    final int AMOUNT_OF_RIGHT_ANWSERS = 3;
-    static public final String ITEM_NAME = "komisch grünes Brötchen";
+    final int AMOUNT_OF_RIGHT_ANWSERS = 6;
+    static public final String ITEM_NAME = "Note 1";
+    boolean isPerfectlyRight;
 
     int countRightAnwsers = 0;
 
@@ -36,18 +34,29 @@ public class JamborGameObject extends TalkRightInputGameObject {
 
     @Override
     public String rightInputMessage() {
-        return "hob mach an Strich";
+        if(isPerfectlyRight){
+            return AbstractGameobject.randomLine("JamborGameObjectRightInput.txt");
+        }
+        else{
+            return AbstractGameobject.randomLine("JamborGameObjectAlmostRightInput.txt");
+        }
     }
 
     @Override
     public String wrongInputMessage() {
-        return "schreibst a Seitn";
+        return AbstractGameobject.randomLine("JamborGameObjectWrongInput.txt");
     }
 
     @Override
     public Item getItemByKeySentence(String key) {
         Item returnValue = null;
-        Optional<StringAndBoolean> value = cellProperties.stream().filter(property -> SehnesGameObject.equalsXPercent(80, property.string, key)).findAny();
+        isPerfectlyRight = false;
+        Optional<StringAndBoolean> value = cellProperties.stream().filter(property -> {
+            if( property.string.equalsIgnoreCase(key)){
+                isPerfectlyRight = true;
+            }
+            return SehnesGameObject.equalsXPercent(70, property.string, key);
+        }).findAny();
         if(value.isPresent()){
             if(!value.get().isUsed){
                 countRightAnwsers++;

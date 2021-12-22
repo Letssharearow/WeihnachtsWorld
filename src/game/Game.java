@@ -51,7 +51,7 @@ public class Game {
         current = world.getCurrent();
         state = GameState.AddName;
         player = new Player("Friendly Cobold");
-        output = "Please Enter your name";
+        output = "Gib deinen Namen ein";
     }
 
     public Game(){
@@ -60,10 +60,10 @@ public class Game {
 
     public void putPlayerItem(Item item){
         if(item == null){
-            output += " something went wrong with your item";
+            output += " huch, irgendwas ist kaputt gegangen";
         }
         else{
-            output += "\ncongratulations, you received: " + item;
+            output += "\nGlückwunsch, du erhälst das Item: " + item;
             player.addItem(item);
         }
     }
@@ -71,7 +71,7 @@ public class Game {
     public void manageInput(String playerInput){
         if(state == GameState.AddName){
             player.name = playerInput;
-            output = "Hallo Wichtelmeister " + playerInput + "\nEnter anything to start the game";
+            output = "Hallo Wichtelmeister " + playerInput + "\nDrücke irgendwas um ins Abenteuer zu starten";
             state = GameState.setStart;
             return;
         }
@@ -86,7 +86,7 @@ public class Game {
         Commands command = toCommand(playerInput);
         if(state == GameState.ItemMenue){
             if(player.getItemsAsString().equals("")){
-                output += " you dont have any items";
+                output += " du hast gar keine Items";
                 state = GameState.newObject;
             }else {
                 try {
@@ -97,14 +97,14 @@ public class Game {
                         output = "";
                     }
                     state = GameState.newObject;
-                    output += "\nitem used";
+                    output += "\nItem benutzt .. vielleicht hat sich was geändert";
                 } catch (NumberFormatException e) {
-                    System.out.println(e.getMessage() + " use Numbers only");
+                    System.out.println(e.getMessage() + " wähle die Zahl von dem Item aus, dass du benutzen willst");
                 }
             }
         }
         else if(current.health <= 0 && (command == null || command.equals(Commands.at) || command.equals(Commands.in))){
-            output += "nothing happened";
+            output += "hier passiert nichts mehr";
             return;
         }
         else if(current instanceof GetItemByKeySentence){
@@ -118,7 +118,7 @@ public class Game {
                 }
                 case ObjectWasAttacked -> {
                         ((ICanAttack) current).attack(player);
-                        output += ((ICanAttack) current).MessageOnAttack();
+                        output += ((ICanAttack) current).MessageOnAttack() + "\nHerzen wurden geklaut";
                         if(player.health <= 0){
                             putPlayerItem(new ItemImpl(player.name+"_Dumm"));
                             player.health = 5;
@@ -157,9 +157,10 @@ public class Game {
                     case d:
                     case l: {
                         if (player.hasItem(JamborGameObject.ITEM_NAME)) {
+                            output += "\n" + AbstractGameobject.randomLine("JamborGameObjectLeaveOnSucceed.txt") + "\n";
                             doReturn = false;
                         } else {
-                            output = "und tschüss ... oder auch nicht.";
+                            output = AbstractGameobject.randomLine("JamborGameObjectLeave.txt");
                         }
                     }
                     break;
@@ -185,7 +186,7 @@ public class Game {
             output += currentKeyObject.wrongInputMessage();
         }
         else {
-            output += currentKeyObject.rightInputMessage() + "\ncongratulations, you received: " + tempItem;
+            output += currentKeyObject.rightInputMessage() + "\nGlückwunsch, du erhälst das Item: " + tempItem;
             player.addItem(tempItem);
         }
     }
@@ -201,7 +202,7 @@ public class Game {
                 else {
                     output += world.getCurrent().attackMessage();
                     if (current instanceof ICanAttack) {
-                        outputEnd = "\n prepare for attack";
+                        outputEnd = "\n pass auf, ein Schneeball";
                         state = GameState.ObjectWasAttacked;
                     } else {
                         state = GameState.newObject;
@@ -223,12 +224,12 @@ public class Game {
             case in ->{
                 output += world.getCurrent().interactMessage();
                 if(current instanceof ICanAttack){
-                    outputEnd = "\n prepare for attack";
+                    outputEnd = "\n pass auf, ein Schneeball";
                     state = GameState.ObjectWasAttacked;
                 }
             }
             case it -> {
-                output += "items: " + player.getItemsAsString();
+                output += "Items: " + player.getItemsAsString();
                 state = GameState.ItemMenue;
             }
             case map -> output += world;
@@ -240,7 +241,7 @@ public class Game {
         if(world.getCurrent() instanceof JamborGameObject){
             if(!playerHasItmes()){
                 world.incXY(xPlus * -1, yPlus * -1);
-                output = "dir Fehlen wichtige Items";
+                output = "dir fehlen noch wichtige Gegenstände um es mit ihm aufzunehmen";
             }
         }
         output += world.getCurrent().helloMessage();
@@ -269,7 +270,7 @@ public class Game {
     }
 
     public String getCommandsAsString(){
-        String st = "" + "\nactions: ";
+        String st = "" + "\nAktionen (left, up, down, right, attack, interact, items, map): ";
         Commands[] commands = Commands.values();
         for (int i = 0; i < commands.length; i++) {
             st += commands[i] + " ";

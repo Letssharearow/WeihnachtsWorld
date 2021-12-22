@@ -82,50 +82,36 @@ public class WorldGenerator {
         return world[x][y];
     }
 
-    public void setX(int x){
-        this.x = x;
-    }
-
-    public void incX(){
-        this.x++;
-    }
-
-    public void incY(){
-        this.y++;
-    }
-
-    public void decX(){
-        this.x--;
-    }
-
-    public void decY(){
-        this.y--;
-    }
-
     public void incXY(int xPlus, int yPlus){
         this.x += xPlus;
+        if(x >= world.length){
+            x = world.length-1;
+        }
+        if(x < 0){
+            x = 0;
+        }
         this.y += yPlus;
-    }
-
-    public void setY(int y){
-        this.y = y;
+        if(y >= world.length){
+            y = world.length-1;
+        }
+        if(y < 0){
+            y = 0;
+        }
     }
 
     @Override
     public String toString(){
         String st = "";
-        for (int i = 0; i < RANGE_OF_MAP; i++) {
-            for (int j = 0; j < RANGE_OF_MAP; j++) {
-                int xTemp = x - RANGE_OF_MAP / 2 + j;
-                int yTemp = y - RANGE_OF_MAP / 2 + i;
-                AbstractGameobject current = world[xTemp][yTemp];
-                if(xTemp == x && yTemp == y){
+        for (int i = 0; i < world.length; i++) {
+            for (int j = 0; j < world.length; j++) {
+                AbstractGameobject current = world[j][i];
+                if(j == x && i == y){
                     st += "[ich]";
                 }
                 else if(current instanceof EndGameObject){
                     st += "?????";
                 }
-                else if(xTemp == world.length / 2 && yTemp == world.length / 2){
+                else if(i == world.length / 2 && j == world.length / 2){
                     st += "  X  ";
                 }
                 else if(current == null){

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        final int SIZE = 50;
+        final int SIZE = 13;
         Game game = new Game(SIZE);
         Scanner scanner = new Scanner(System.in);
         String eingabe = "";

@@ -70,7 +70,7 @@ public class Player {
     public String toString(){
         String st = name;
         st += " damage: " + damage;
-        st += " health: ";
+        st += ", health("+ health + ": ";
         for (int i = 0; i < maxHealth; i++) {
             if(i < health){
                 st += "♥";
