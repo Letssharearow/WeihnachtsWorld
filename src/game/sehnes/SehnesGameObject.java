@@ -1,14 +1,80 @@
 package game.sehnes;
 
+import game.AbstractGameobject;
+import game.Item;
+import game.ItemImpl;
+import game.TalkRightInputGameObject;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-public class SehnesGameObject {
+public class SehnesGameObject extends TalkRightInputGameObject implements IsSehne {
+    public static final String[] keys = new String[]{"10", "prostaugust", "lebensmittelchemie", "mazda 2", "31.07.21", "118", "hokkaido", "mau mau"}; //philipp, juli, ..
+    public static final String[] values = new String[]{"Schülerausweis", "ProstAugust", "Isopropyl Profimil Barbitur Saures Phenyl Dementhyl Amino Phyrazolon", "Misterious key", "20 Snacktüten", "Feuerwehrhelm", "Zaubertrank", "Man nimmt einem Blinden doch nicht seinen Stock"}; //philipp, juli, ..
 
-    public static final String[] keys = new String[]{"10", "prostaugust", "lebensmittelchemie", "mazda 2", "31", "118", "hokkaido", "mau mau"}; //philipp, juli, ..
-    public static final String[] values = new String[]{"Schülerausweis", "ProstAugust", "irdend son chemieDing", "Misterious key", "20 Snacktüten", "Feuerwehrhelm", "Zaubertrank", "Man nimmt einem Blinden doch nicht seinen Stock"}; //philipp, juli, ..
+    String rightInput;
+    String wrongInput;
+    int sehneIndex;
+    int percent;
+    protected boolean hasGivenItem = false;
+
+    public SehnesGameObject(String name, Item item, int sehneIndex, int percent, String rightInput, String wrongInput) {
+        super(name,500, item);
+        this.sehneIndex = sehneIndex;
+        this.percent = percent;
+        this.rightInput = rightInput;
+        this.wrongInput = wrongInput;
+    }
+
+    @Override
+    public Item getItemByKeySentence(String key) {
+        if(SehnesGameObject.equalsXPercent(percent, key.toLowerCase(), SehnesGameObject.keys[sehneIndex].toLowerCase())){
+            if(hasGivenItem){
+                return new ItemImpl("nope");
+            }
+            hasGivenItem = true;
+            return item;
+        }
+        return null;
+    }
+
+    @Override
+    public String rightInputMessage() {
+        return rightInput;
+    }
+
+    @Override
+    public String interactMessage(){
+        if(hasGivenItem){
+            return "fertig hier";
+        }
+        if(endMessage != null){
+            return endMessage;
+        }
+        line ++;
+        String returnValue;
+        try{
+            returnValue = AbstractGameobject.lineAtIndex(CLASS_NAME + "interactMessage" + ".txt", line);
+        }
+        catch (IndexOutOfBoundsException e){
+            line--;
+            endMessage = AbstractGameobject.lineAtIndex(CLASS_NAME + "interactMessage" + ".txt", line);
+            returnValue = endMessage;
+        }
+        return returnValue;
+    }
+
+    @Override
+    public String wrongInputMessage() {
+        if(hasGivenItem){
+            return "fertig hier";
+        }
+        return wrongInput;
+    }
+
+
 
 
 
