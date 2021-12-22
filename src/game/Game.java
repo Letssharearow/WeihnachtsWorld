@@ -31,7 +31,7 @@ public class Game {
             //new MatheAufgabeGameObject("Rentieraufgabe","matheaufgabe1RentierZeit.txt", "b")
     };
 
-    public Game(int size, int difficulty) {
+    public Game(int size) {
         List<AbstractGameobject> enemies = new ArrayList<>();
 
         enemies.add(new StaticStoryGameObject());
@@ -54,8 +54,8 @@ public class Game {
         output = "Please Enter your name";
     }
 
-    public Game(int size){
-        this(size, 1);
+    public Game(){
+        this(50);
     }
 
     public void putPlayerItem(Item item){
@@ -63,7 +63,7 @@ public class Game {
             output += " something went wrong with your item";
         }
         else{
-            output += "congratulations, you now have: " + item;
+            output += "\ncongratulations, you received: " + item;
             player.addItem(item);
         }
     }
@@ -71,7 +71,7 @@ public class Game {
     public void manageInput(String playerInput){
         if(state == GameState.AddName){
             player.name = playerInput;
-            output = "Hello Wichtelmeister " + playerInput + "\nEnter anything to start the game";
+            output = "Hallo Wichtelmeister " + playerInput + "\nEnter anything to start the game";
             state = GameState.setStart;
             return;
         }
@@ -82,10 +82,6 @@ public class Game {
         }
         output = "";
         outputEnd = " " + getCommandsAsString();
-        if(current.health <= 0){
-            output += "nothing happened";
-            return;
-        }
         current = world.getCurrent();
         Commands command = toCommand(playerInput);
         if(state == GameState.ItemMenue){
@@ -101,10 +97,15 @@ public class Game {
                         output = "";
                     }
                     state = GameState.newObject;
+                    output += "\nitem used";
                 } catch (NumberFormatException e) {
                     System.out.println(e.getMessage() + " use Numbers only");
                 }
             }
+        }
+        else if(current.health <= 0 && (command == null || command.equals(Commands.at) || command.equals(Commands.in))){
+            output += "nothing happened";
+            return;
         }
         else if(current instanceof GetItemByKeySentence){
             handleStateGetItemByKeySentence(command, playerInput);
@@ -117,11 +118,11 @@ public class Game {
                 }
                 case ObjectWasAttacked -> {
                         ((ICanAttack) current).attack(player);
+                        output += ((ICanAttack) current).MessageOnAttack();
                         if(player.health <= 0){
                             putPlayerItem(new ItemImpl(player.name+"_Dumm"));
                             player.health = 5;
                         }
-                        output += ((ICanAttack) current).MessageOnAttack();
                         state = GameState.newObject;
                 }
                 case ObjectDied -> {
@@ -134,7 +135,7 @@ public class Game {
                 }
             }
         }
-        output = world.toString() + "\n" + world.getCurrent() + "\n" + output + "\n\n" + player.toString();
+        output = world.toString() + "\n" + output + "\n" + world.getCurrent() + "\n\n" + player.toString();
     }
 
     private void handleStateGetItemByKeySentence(Commands command, String playerInput) {
@@ -195,16 +196,16 @@ public class Game {
                 world.getCurrent().health -= player.damage;
                 if(world.getCurrent().health <= 0){
                     output += world.getCurrent().dieMessage();
+                    putPlayerItem(current.item);
                 }
-                else{
+                else {
                     output += world.getCurrent().attackMessage();
-                }
-                if(current instanceof ICanAttack){
-                    outputEnd = "\n prepare for attack";
-                    state = GameState.ObjectWasAttacked;
-                }
-                else{
-                    state = GameState.newObject;
+                    if (current instanceof ICanAttack) {
+                        outputEnd = "\n prepare for attack";
+                        state = GameState.ObjectWasAttacked;
+                    } else {
+                        state = GameState.newObject;
+                    }
                 }
             }
             case d -> {
@@ -229,10 +230,6 @@ public class Game {
             case it -> {
                 output += "items: " + player.getItemsAsString();
                 state = GameState.ItemMenue;
-                if(current instanceof ICanAttack){
-                    outputEnd = "\n prepare for attack";
-                    state = GameState.ObjectWasAttacked;
-                }
             }
             case map -> output += world;
         }
