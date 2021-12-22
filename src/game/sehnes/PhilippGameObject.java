@@ -1,31 +1,12 @@
 package game.sehnes;
 
-import game.Item;
 import game.ItemKey;
 
-public class PhilippGameObject extends game.TalkRightInputGameObject implements IsSehne{
+public class PhilippGameObject extends SehnesGameObject{
     public PhilippGameObject() {
-        super("Philipp", 500, new ItemKey(SehnesGameObject.values[0].toLowerCase()));
+        super("Philipp", new ItemKey(SehnesGameObject.values[0].toLowerCase()),
+                0, 100, "Könnte sein, dass man den noch Stempeln muss", "Du dummi");
     }
-
-    @Override
-    public Item getItemByKeySentence(String key) {
-        if(SehnesGameObject.equalsXPercent(100, key.toLowerCase(), SehnesGameObject.keys[0].toLowerCase())){
-            return item;
-        }
-        return null;
-    }
-
-    @Override
-    public String rightInputMessage() {
-        return "Könnte sein, dass man den noch Stempeln muss";
-    }
-
-    @Override
-    public String wrongInputMessage() {
-        return "Du dummi";
-    }
-
 
 /*
     public static final AbstractGameobject[] = new AbstractGameobject[]{

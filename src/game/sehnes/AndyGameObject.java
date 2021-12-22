@@ -1,39 +1,19 @@
 package game.sehnes;
 
-import game.Item;
 import game.ItemKey;
 import game.Player;
-import game.TalkRightInputGameObject;
 
-public class AndyGameObject extends TalkRightInputGameObject implements IsSehne {
+public class AndyGameObject extends SehnesGameObject implements IsSehne {
 
     public AndyGameObject() {
         super("Andy",
-                500,
                 new ItemKey(SehnesGameObject.values[5].toLowerCase()){
                     @Override
                     public void useItem(Player player){
                         player.changeHealth(amount);
                         amount = 0;
                     }
-                });
-    }
-
-    @Override
-    public Item getItemByKeySentence(String key) {
-        if(SehnesGameObject.equalsXPercent(80, key.toLowerCase(), SehnesGameObject.keys[5].toLowerCase())){
-            return item;
-        }
-        return null;
-    }
-
-    @Override
-    public String rightInputMessage() {
-        return "es ist aus Holz";
-    }
-
-    @Override
-    public String wrongInputMessage() {
-        return "dödel";
+                }
+                , 5, 100, "es ist aus Holz", "dödel");
     }
 }
