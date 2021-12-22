@@ -94,12 +94,6 @@ public abstract class AbstractGameobject {
                 allLines.add(currentLine);
                 i++;
             }
-            if(index >= allLines.size()){
-                randomLine = "randomLine";
-            }
-            if(index >= allLines.size()){
-                index = allLines.size()-1;
-            }
             randomLine = allLines.get(index);
 
         } catch (FileNotFoundException e) {
