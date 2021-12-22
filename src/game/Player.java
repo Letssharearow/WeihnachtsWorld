@@ -6,6 +6,7 @@ import java.util.List;
 public class Player {
     public String name;
     int health;
+    int maxHealth = 20;
     public int damage;
     private List<Item> items;
 
@@ -19,6 +20,9 @@ public class Player {
 
     public void changeHealth(int amount){
         this.health += amount;
+        if(health > maxHealth){
+            health = maxHealth;
+        }
     }
 
     public void addDamage(int amount){
@@ -51,7 +55,8 @@ public class Player {
         int i = 0;
         for (Item item: items
              ) {
-            st += i + " = " + item.toString();
+            st += i + " = " + item.toString() + ", ";
+            i++;
         }
         return st;
     }
@@ -66,8 +71,13 @@ public class Player {
         String st = name;
         st += " damage: " + damage;
         st += " health: ";
-        for (int i = 0; i < health; i++) {
-            st += "♥";
+        for (int i = 0; i < maxHealth; i++) {
+            if(i < health){
+                st += "♥";
+            }
+            else{
+                st += "○";
+            }
         }
         return st;
     }
