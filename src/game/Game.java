@@ -118,7 +118,7 @@ public class Game {
                 }
                 case ObjectWasAttacked -> {
                         ((ICanAttack) current).attack(player);
-                        output += ((ICanAttack) current).MessageOnAttack() + "\nHerzen wurden geklaut";
+                        output += ((ICanAttack) current).MessageOnAttack() + "\nGeschenke wurden geklaut";
                         if(player.health <= 0){
                             putPlayerItem(new ItemImpl(player.name+"_Dumm"));
                             player.health = 5;
@@ -232,7 +232,7 @@ public class Game {
                 output += "Items: " + player.getItemsAsString();
                 state = GameState.ItemMenue;
             }
-            case map -> output += world;
+            case map -> {}
         }
     }
 

@@ -69,14 +69,14 @@ public class Player {
     @Override
     public String toString(){
         String st = name;
-        st += " damage: " + damage;
-        st += ", health("+ health + ": ";
+        st += " Haudrauf-Wert: " + damage;
+        st += ", Geschenke("+ health + "): ";
         for (int i = 0; i < maxHealth; i++) {
             if(i < health){
-                st += "♥";
+                st += "◘";
             }
             else{
-                st += "○";
+                st += " •";
             }
         }
         return st;
