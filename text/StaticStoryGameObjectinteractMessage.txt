@@ -1,10 +1,13 @@
-Ich hab den Philipp die letzte Zeit öfters mal im Kraftraum gesehen
-Ich habe gesehen, dass Juli nach Würzburg fährt um dort in der Mensa zu essen
-Ich sehe immer neue Menschen am Herd
-Juli hat sich einfach den Bus geschnappt und ist damit nach Kroatien gefahren
+Ich sehe mehr Menschen Mittags am Herd
+Es steht seit diesem Jahr ein neues Auto auf dem Abstellplatz
+Ich habe den Bus für 10 Tage nicht gesehen..
 Philipp fährt mal gerne mit dem Fahrrad nach Geiselwind
-Juli ist ganz schön oft beim Volleyball schon das 5. mal diese Woche ... und es ist erst Donnerstag
-Ich sehe immer weniger Fleisch im Kühlschrank
-Mama kommt rein und erzählt ganz viel von ihrer Arbeit als Lehrerin
-Der Juli hat keine Zahnspange mehr
-philipp.getHolz() wird immer häufiger genutzt
+Da hüpft einer die ganze Zeit zum Volleyball. Schon das 5. mal diese Woche ... und es ist erst Donnerstag
+Irgendwer besetzt Dienstags Nachmittags seit neustem die Dusche, was der wohl macht?
+morgens ist das Haus doch tatsächlich leer manchmal
+Da ist immer weniger Fleisch im Kühlschrank
+Mittags bekomme ich immmer ganz wilde Geschichten aus der Perspektive einer Lehererin erzählt
+Da schaut jemand immer mit so einem Lächeln in den Spiegel, was der wohl hat?
+da führt doch täglich jemand philipp.getHolz() aus
+auch juli.getBrot() hat sich durchgesetzt
+Das Essen muss wohl Dienstags nicht so gut sein, weil da immer einer nach Würzburg fährt
