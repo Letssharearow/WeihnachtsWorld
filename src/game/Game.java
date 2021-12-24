@@ -172,7 +172,7 @@ public class Game {
             }
         }
         if(current instanceof EndGameObject){
-            if(((EndGameObject) current).hasOne){
+            if(((EndGameObject) current).hasOne || current.health <= 0){
                 rollCredits();
                 return;
             }
