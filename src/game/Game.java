@@ -15,6 +15,8 @@ public class Game {
     String outputEnd = "";
     public boolean isOver = false;
 
+    Secret secret = new Secret();
+
     public static final AbstractGameobject[] allObjects = new AbstractGameobject[]{
             new StartObject(),
             new PhilippGameObject(),
@@ -68,7 +70,18 @@ public class Game {
         }
     }
 
+    public boolean secretSentences(String playerInput){
+        if(secret.checkSentence(playerInput)){
+            output = secret.currentSentence;
+            return true;
+        }
+        return false;
+    }
+
     public void manageInput(String playerInput){
+        if(secretSentences(playerInput)){
+            return;
+        }
         if(state == GameState.AddName){
             player.setName(playerInput);
             output = "Hallo Wichtelmeister " + playerInput + "\nDrücke irgendwas um ins Abenteuer zu starten";
