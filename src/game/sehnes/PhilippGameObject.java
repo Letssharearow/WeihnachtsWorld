@@ -1,10 +1,16 @@
 package game.sehnes;
 
 import game.ItemKey;
+import game.Player;
 
 public class PhilippGameObject extends SehnesGameObject{
     public PhilippGameObject() {
-        super("Philipp", new ItemKey(SehnesGameObject.values[0].toLowerCase()),
+        super("Philipp", new ItemKey(SehnesGameObject.values[0].toLowerCase()){
+            @Override
+            public void useItem(Player player){
+                player.setName("Philipp");
+            }
+        },
                 0, 100, "Könnte sein, dass man den noch Stempeln muss", "Du dummi");
     }
 

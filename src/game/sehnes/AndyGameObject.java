@@ -10,7 +10,7 @@ public class AndyGameObject extends SehnesGameObject implements IsSehne {
                 new ItemKey(SehnesGameObject.values[5].toLowerCase()){
                     @Override
                     public void useItem(Player player){
-                        player.changeHealth(amount);
+                        player.setMaxHealth(player.getMaxHealth() + amount);
                         amount = 0;
                     }
                 }

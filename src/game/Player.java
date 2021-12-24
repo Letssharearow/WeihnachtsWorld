@@ -81,4 +81,16 @@ public class Player {
         }
         return st;
     }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setMaxHealth(int maxHealth){
+        this.maxHealth = maxHealth;
+    }
+
+    public int getMaxHealth(){
+        return this.maxHealth;
+    }
 }
