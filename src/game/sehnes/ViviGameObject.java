@@ -11,7 +11,7 @@ public class ViviGameObject extends SehnesGameObject{
             public void useItem(Player player){
                 player.changeHealth((int)(Math.random() * amount * 2 - amount));
             }
-        }, 2, 100, "NICHT ANZÜNDEN!", "muss man nicht wissen");
+        }, 2, 80, "NICHT ANZÜNDEN!", "Ach krass, dabei bin ich schon im Master");
     }
     public static void main(String[] args) {
         for (int i = 0; i <100; i++) {

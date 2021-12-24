@@ -11,6 +11,6 @@ public class PapaGameObject extends SehnesGameObject{
             public void useItem(Player player){
                 player.setDamage(3);
             }
-        }, 7, 90, "Hast du meinen Blindenstock gesehen?", "Alexa, spiele \"du hast verloren\"");
+        }, 7, 80, "Hast du meinen Blindenstock gesehen?", "Alexa, spiele \"du hast verloren\"");
     }
 }

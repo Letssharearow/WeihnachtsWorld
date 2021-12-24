@@ -99,7 +99,8 @@ public class Game {
                     state = GameState.newObject;
                     output += "\nItem benutzt .. vielleicht hat sich was geändert";
                 } catch (NumberFormatException e) {
-                    System.out.println(e.getMessage() + " wähle die Zahl von dem Item aus, dass du benutzen willst");
+                    output += "\ngeben die Zahl von dem Item ein, welches du benutzen willst";
+                    state = GameState.newObject;
                 }
             }
         }
@@ -202,7 +203,7 @@ public class Game {
                 else {
                     output += world.getCurrent().attackMessage();
                     if (current instanceof ICanAttack) {
-                        outputEnd = "\n pass auf, ein Schneeball";
+                        outputEnd = "\n oh nein, Geschenkdiebe";
                         state = GameState.ObjectWasAttacked;
                     } else {
                         state = GameState.newObject;

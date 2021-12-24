@@ -12,7 +12,7 @@ public class JuliGameObject extends SehnesGameObject{
                 player.changeHealth(amount);
                 amount = 0;
             }
-        }, 1, 80,"vielleicht heißts auch AugustProst, schmecken tuts auf jeden Fall",
+        }, 1, 70,"vielleicht heißts auch AugustProst, schmecken tuts auf jeden Fall",
                 "so gut, dass man sich den Namen nicht merken kann, wa");
     }
 }
