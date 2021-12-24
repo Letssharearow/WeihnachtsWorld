@@ -143,7 +143,7 @@ public class SehnesGameObject extends TalkRightInputGameObject implements IsSehn
                     return second;
                 });
         if(resultOptional.isPresent()){
-            return (float) compareTo.length() >= x / 100f;
+            return (float) resultOptional.get() >= x / 100f * compareTo.length();
         }
         return false;
     }
