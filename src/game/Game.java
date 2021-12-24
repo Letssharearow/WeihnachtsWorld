@@ -70,7 +70,7 @@ public class Game {
 
     public void manageInput(String playerInput){
         if(state == GameState.AddName){
-            player.name = playerInput;
+            player.setName(playerInput);
             output = "Hallo Wichtelmeister " + playerInput + "\nDrücke irgendwas um ins Abenteuer zu starten";
             state = GameState.setStart;
             return;
