@@ -271,7 +271,7 @@ public class Game {
     }
 
     public String getCommandsAsString(){
-        String st = "" + "\nAktionen (left, up, down, right, attack, interact, items, map): ";
+        String st = "" + "\nAktionen (left, up, down, right, haudrauf (at), interact, items, map): ";
         Commands[] commands = Commands.values();
         for (int i = 0; i < commands.length; i++) {
             st += commands[i] + " ";

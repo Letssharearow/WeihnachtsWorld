@@ -63,7 +63,9 @@ public class JamborGameObject extends TalkRightInputGameObject {
                 value.get().isUsed = true;
                 returnValue = new ItemImpl("Strich: " + countRightAnwsers + " von " + AMOUNT_OF_RIGHT_ANWSERS);
             }
-
+            else{
+                System.out.println("das hamma grad erst gesacht");
+            }
         }
         if(countRightAnwsers >= AMOUNT_OF_RIGHT_ANWSERS){
             return item;
